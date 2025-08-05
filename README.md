@@ -85,9 +85,186 @@ A normalização é dividida em etapas chamadas formas normais (1FN, 2FN, 3FN...
 ### Exemplo rápido
 <img width="862" height="341" alt="image" src="https://github.com/user-attachments/assets/57a8a55b-7e6b-4de5-b715-e982fbad6886" />
 
+---
+## Exemplo de tabela não normalizada
+<img width="754" height="155" alt="image" src="https://github.com/user-attachments/assets/eb95554a-2906-441f-a8cd-6fc90760a2e9" />
 
+A imagem mostra um exemplo de tabela **não normalizada**, ou seja, uma estrutura de banco de dados onde as informações estão organizadas de forma redundante e sem separação adequada dos dados.
 
+Como essa tabela foi feita:
 
+Ela reúne informações de clientes, produtos e compras em uma única tabela.
+
+**Cliente_Nome** e **Cliente_Endereço** estão juntos em cada linha, **mesmo que se repitam** (como no caso da "Ana Banana").
+
+**Produto_ID** e **Produto_Nome** também se repetem a cada compra, em vez de estarem em uma tabela separada.
+
+Os campos Quantidade e Preço_Total indicam a transação feita.
+
+---
+## Exemplo de tabela normalizada
+
+## **1FN**
+Em termos simples, ela garante que cada coluna em uma tabela tenha apenas valores atômicos (indivisíveis) e que cada linha seja única através de uma chave primária;
+
+| Cliente_Nome | Avenida_Endereço    | Número | Produto_ID | Produto_Nome    | Quantidade | Preço_Total |
+|--------------|---------------------|--------|------------|-----------------|------------|-------------|
+| Ana Banana   | Rua do Sorriso      | 99     | 20         | Bola de Futebol | 3          | 45,00       |
+| Ana Banana   | Rua do Sorriso      | 99     | 21         | Sorvete         | 5          | 25,00       |
+| Pedro Picles | Av. das Laranjas    | 22     | 22         | Skate           | 1          | 120,00      |
+| Pedro Picles | Av. das Laranjas    | 23     | 23         | Chapéu Maluco   | 2          | 60,00       |
+| Clara Cacau  | Travessa das Flores | 20     | 20         | Bola de Futebol | 1          | 15,00       
+
+---
+## **2FN**
+É um conceito em modelagem de bancos de dados que visa eliminar a redundância de dados, garantindo que cada atributo não chave em uma tabela dependa funcionalmente de toda a chave primária, e não apenas de parte dela.
+
+## 1. Cliente
+| Cliente_ID | Cliente_Nome | Avenida_Endereço    | Número |
+|------------|--------------|---------------------|--------|
+| 1          | Ana Banana   | Rua do Sorriso      | 99     |
+| 2          | Pedro Picles | Av. das Laranjas    | 22     |
+| 3          | Clara cacau  | Travessa das Flores | 20     |
+
+## 2. Produto
+| Produto_ID | Produto_Nome    |
+|------------|-----------------|
+| 20         | Bola de Futebol |
+| 21         | Sorvete         |
+| 22         | 	Skate          |
+| 23         | Chapéu Maluco   |
+
+## 3. Compras
+| Compra_ID | Cliente_ID | Produto_ID | Quantidade | Preço_Total |
+|-----------|------------|------------|------------|-------------|
+| 1         | 1          | 20         | 3          | 45,00       |
+| 2         | 1          | 21         | 5          | 25,00       |
+| 3         | 2          | 22         | 1          | 120,00      |
+| 4         | 2          | 23         | 2          | 60,00       |
+| 5         | 3          | 20         | 1          | 15,00       |
+|           |            |            |            |             |
+
+---
+## **3FN**
+É um conceito fundamental na modelagem de bancos de dados, que visa eliminar dependências transitivas em tabelas.
+
+## 1. Clientes
+| Cliente_ID | Cliente_Nome  | Avenida_Endereço    | 	Número |
+|------------|---------------|---------------------|---------|
+| 1          | Ana Banana   | Rua do Sorriso      | 90      |
+| 2          | Pedro Picles | 	Av. das Laranjas   | 22      |
+| 3          | Clara Cacau   | Travessa das Flores | 20      |
+
+## 2. Produtos
+| Produto_ID | Produto_Nome    | Preço_Unitário |
+|------------|-----------------|----------------|
+| 20         | Bola de Futebol | 15,00          |
+| 21         | Sorvete         | 5,00           |
+| 22         | Skate           | 120,00         |
+| 23         | Chapéu Maluco   | 30,00          |
+|            |                 |                |
+
+## 3. Compras
+| Compra_ID | Cliente_ID | Produto_ID | Quantidade |
+|-----------|------------|------------|------------|
+| 1         | 1          | 20         | 3          |
+| 2         | 1          | 21         | 5          |
+| 3         | 2          | 22         | 1          |
+| 4         | 2          | 23         | 2          |
+| 5         | 3          | 20         | 1          |
+
+---
+
+[
+  {
+    "Cliente_Nome": "Ana banana",
+    "Cliente_Endereço": "Rua do Sorriso, 99",
+    "Produto_ID": "20",
+    "Produto_Nome": "Bola de Futebol",
+    "Quantidade": "3",
+    "Preço_Total": "45,00"
+  },
+  {
+    "Cliente_Nome": "Ana banana",
+    "Cliente_Endereço": "Rua do Sorriso, 99",
+    "Produto_ID": "21",
+    "Produto_Nome": "Sorvete",
+    "Quantidade": "5",
+    "Preço_Total": "25,00"
+  },
+  {
+    "Cliente_Nome": "Pedro Picles",
+    "Cliente_Endereço": "Av. das Laranjas, 12",
+    "Produto_ID": "22",
+    "Produto_Nome": "Skate",
+    "Quantidade": "1",
+    "Preço_Total": "120,00"
+  },
+  {
+    "Cliente_Nome": "Pedro Picles",
+    "Cliente_Endereço": "Av. das Laranjas, 12",
+    "Produto_ID": "23",
+    "Produto_Nome": "Chapéu Maluco",
+    "Quantidade": "2",
+    "Preço_Total": "60,00"
+  },
+  {
+    "Cliente_Nome": "Clara cacau",
+    "Cliente_Endereço": "Travessa das Flores, 7",
+    "Produto_ID": "20",
+    "Produto_Nome": "Bola de Futebol",
+    "Quantidade": "1",
+    "Preço_Total": "15,00"
+  },
+  {
+    "Cliente_Nome": "",
+    "Cliente_Endereço": "",
+    "Produto_ID": "",
+    "Produto_Nome": "",
+    "Quantidade": "",
+    "Preço_Total": ""
+  },
+  {
+    "Cliente_Nome": "",
+    "Cliente_Endereço": "",
+    "Produto_ID": "",
+    "Produto_Nome": "",
+    "Quantidade": "",
+    "Preço_Total": ""
+  },
+  {
+    "Cliente_Nome": "",
+    "Cliente_Endereço": "",
+    "Produto_ID": "",
+    "Produto_Nome": "",
+    "Quantidade": "",
+    "Preço_Total": ""
+  },
+  {
+    "Cliente_Nome": "",
+    "Cliente_Endereço": "",
+    "Produto_ID": "",
+    "Produto_Nome": "",
+    "Quantidade": "",
+    "Preço_Total": ""
+  },
+  {
+    "Cliente_Nome": "",
+    "Cliente_Endereço": "",
+    "Produto_ID": "",
+    "Produto_Nome": "",
+    "Quantidade": "",
+    "Preço_Total": ""
+  },
+  {
+    "Cliente_Nome": "",
+    "Cliente_Endereço": "",
+    "Produto_ID": "",
+    "Produto_Nome": "",
+    "Quantidade": "",
+    "Preço_Total": ""
+  }
+]
 
 
 
