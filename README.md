@@ -174,7 +174,8 @@ Em termos simples, ela garante que cada coluna em uma tabela tenha apenas valore
 | 5         | 3          | 20         | 1          |
 
 ---
-
+````
+```
 [
   {
     "Cliente_Nome": "Ana banana",
@@ -267,5 +268,6 @@ Em termos simples, ela garante que cada coluna em uma tabela tenha apenas valore
 ]
 
 
-
+```
+````
 
